@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+  <groupId>TestLinkAdapter</groupId>
+  <artifactId>TestLinkAdapter</artifactId>
+  <version>2.0</version>
+
+  <name>TestLinkAdapter</name>
+  <inceptionYear>2014</inceptionYear>
+  <organization>
+    <name>UQASAR Consortium</name>
+  </organization>
+
+
+	<repositories>
+		<!-- JBoss Maven Repository -->
+		<repository>
+			<id>jboss-public</id>
+			<name>JBoss Maven Public Repository</name>
+			<url>https://repository.jboss.org/nexus/content/groups/public/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+
+		<!-- ATB Maven Repository -->
+		<repository>
+			<id>atb-ext-releases</id>
+			<name>ATB Maven Public RELEASES Repository</name>
+			<url>http://www.atb-bremen.de/artifactory/ext-releases-local/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>atb-ext-snapshots</id>
+			<name>ATB Maven Public SNAPSHOT Repository</name>
+			<url>http://www.atb-bremen.de/artifactory/ext-snapshots-local/</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+		
+	</repositories>
+
+  <dependencies>
+     <dependency>
+      <groupId>uQasarAdapter</groupId>
+      <artifactId>uQasarAdapter</artifactId>
+      <version>2.0</version>
+    </dependency>  
+
+
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>1.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.xmlrpc</groupId>
+      <artifactId>xmlrpc-client</artifactId>
+      <version>3.1.3</version>
+    </dependency>
+            
+        <dependency>
+	<groupId>org.apache.ws.commons.util</groupId>
+	<artifactId>ws-commons-util</artifactId>
+	<version>1.0.2</version>
+</dependency>
+
+<dependency>
+  <groupId>junit</groupId>
+  <artifactId>junit</artifactId>
+  <version>4.11</version>
+  <scope>test</scope>
+</dependency>
+
+    <dependency>
+  <groupId>br.eti.kinoshita</groupId>
+  <artifactId>testlink-java-api</artifactId>
+  <!-- increased to 1.9.8 to solve exception new TestlinkAPI() -->
+  <version>1.9.8-1</version>
+</dependency>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <version>1.6.4</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>1.2.16</version>
+    </dependency>
+
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>1.3.2</version>
+    </dependency>
+
+<dependency>
+          <groupId>commons-lang</groupId>
+          <artifactId>commons-lang</artifactId>
+          <version>2.3</version>
+      </dependency>
+      
+    <dependency>
+      <groupId>org.json</groupId>
+      <artifactId>json</artifactId>
+      <version>20131018</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-all</artifactId>
+      <version>1.9.0</version>
+    </dependency>
+    
+    <!-- ORACLE database driver -->
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc6</artifactId>
+			<version>11.2.0.3</version>
+		</dependency>
+		
+<!-- 		<dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>5.1.15-bin</version>
+    </dependency>  -->
+    
+    <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.0.3</version>
+            <scope>runtime</scope>
+        </dependency>
+		
+  </dependencies>
+  
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <configuration>
+          <archive>
+            <manifest>
+              <mainClass>eu.uqasar.testlink.adapter.TestLinkAdapter</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+
+		<plugin>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <configuration>
+                <archive>
+                    <manifest>
+                        <mainClass>eu.uqasar.testlink.adapter.TestLinkAdapter</mainClass>
+                    </manifest>
+                </archive>
+                <descriptorRefs>
+                    <descriptorRef>jar-with-dependencies</descriptorRef>
+                </descriptorRefs>
+            </configuration>
+        </plugin>
+      
+      
+      <plugin>
+        <inherited>true</inherited>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.5.1</version>
+        <configuration>
+          <source>1.6</source>
+          <target>1.6</target>
+          <encoding>UTF-8</encoding>
+          <showWarnings>true</showWarnings>
+          <showDeprecation>true</showDeprecation>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
